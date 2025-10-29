@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                              http://maven.apache.org/xsd/settings-1.0.0.xsd">
+    
+    <!-- Don't use mirrors, use repositories instead for better fallback -->
+    
+    <profiles>
+        <profile>
+            <id>default</id>
+            <repositories>
+                <repository>
+                    <id>central</id>
+                    <url>https://repo.maven.apache.org/maven2</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>central</id>
+                    <url>https://repo.maven.apache.org/maven2</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+            <properties>
+                <!-- Retry 10 times on network errors -->
+                <maven.wagon.http.retryHandler.count>10</maven.wagon.http.retryHandler.count>
+                <!-- Connection timeout: 10 minutes -->
+                <maven.wagon.httpconnectionManager.ttlSeconds>600</maven.wagon.httpconnectionManager.ttlSeconds>
+                <!-- Disable connection pooling -->
+                <maven.wagon.http.pool>false</maven.wagon.http.pool>
+                <!-- Read timeout: 10 minutes (600,000ms) -->
+                <maven.wagon.rto>600000</maven.wagon.rto>
+                <!-- Connection timeout: 2 minutes (120,000ms) -->
+                <maven.wagon.http.connectionTimeout>120000</maven.wagon.http.connectionTimeout>
+            </properties>
+        </profile>
+    </profiles>
+    
+    <activeProfiles>
+        <activeProfile>default</activeProfile>
+    </activeProfiles>
+</settings>
+
